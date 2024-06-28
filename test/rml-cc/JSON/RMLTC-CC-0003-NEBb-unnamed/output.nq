@@ -1,0 +1,5 @@
+_:bnode_subject1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_1> "1" 
+_:bnode_subject1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag> 
+_:bnode_subject1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_2> "2" 
+_:bnode_subject1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#_3> "3" 
+<http://example.com/e/a> <http://example.com/ns#with> _:bnode_subject1 

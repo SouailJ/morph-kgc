@@ -1,0 +1,16 @@
+<http://example.com/c/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode1 
+<http://example.com/c/b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "3" 
+_:bnode2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "a" 
+_:bnode6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "c" 
+_:bnode3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "b" 
+<http://example.com/c/b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode5 
+_:bnode3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> 
+<http://example.com/e/b> <http://example.com/ns#with> <http://example.com/c/b> 
+<http://example.com/c/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "1" 
+_:bnode6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> 
+_:bnode1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode2 
+_:bnode2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode3 
+<http://example.com/e/a> <http://example.com/ns#with> <http://example.com/c/a> 
+_:bnode5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode6 
+_:bnode5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "4" 
+_:bnode1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "2" 

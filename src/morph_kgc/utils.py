@@ -245,12 +245,12 @@ def remove_null_values_from_dataframe(data, config, references, column=None):
 
     return data
 
-
+"""
 def normalize_hierarchical_data(data):
-    """
-    This is taken from
-    https://stackoverflow.com/questions/36731480/flatten-nested-json-dict-list-into-list-to-prepare-to-write-into-db#answer-43173998
-    """
+    
+    # This is taken from
+    # https://stackoverflow.com/questions/36731480/flatten-nested-json-dict-list-into-list-to-prepare-to-write-into-db#answer-43173998
+    
     if isinstance(data, dict):
         keys = data.keys()
         values = (normalize_hierarchical_data(i) for i in data.values())
@@ -261,7 +261,26 @@ def normalize_hierarchical_data(data):
             yield from normalize_hierarchical_data(i)
     else:
         yield data
+"""
 
+def normalize_hierarchical_data(data):
+    """
+    This is taken from
+    https://stackoverflow.com/questions/36731480/flatten-nested-json-dict-list-into-list-to-prepare-to-write-into-db#answer-43173998
+    """
+    if isinstance(data, dict):
+        keys = data.keys()
+        values = (normalize_hierarchical_data(i) for i in data.values())
+        for i in product(*values):
+            yield dict(zip(keys, i))
+    elif isinstance(data, list):
+        if len(data) == 0:
+            yield None
+        else:
+            for i in data:
+                yield from normalize_hierarchical_data(i)
+    else:
+        yield data
 
 def triples_to_file(triples, config, mapping_group=None):
     """

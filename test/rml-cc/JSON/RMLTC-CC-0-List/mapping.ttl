@@ -1,0 +1,47 @@
+@prefix rml: <http://w3id.org/rml/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix ex:  <http://example.com/ns#>.
+@base        <http://example.com/>.
+ 
+<#TM> a rml:TriplesMap;
+    rml:logicalSource [
+        rml:source "data.json";
+        rml:referenceFormulation rml:JSONPath ;
+        rml:iterator "$.*" ;
+    ] ;
+ 
+    rml:subjectMap [
+        rml:template "http://example.com/e/{id}" ;
+	    rml:class ex:Foo ;
+    ] ;
+ 
+    # rml:predicateObjectMap [
+    #     rml:predicate ex:bar ;
+    #     rml:objectMap [
+    #         rml:reference "vala" ;
+    #     ] ;
+    # ] ;
+    # rml:predicateObjectMap [
+    #     rml:predicate ex:bar ;
+    #     rml:objectMap [
+    #         rml:reference "valb" ;
+    #     ] ;
+    # ] ;
+ 
+    rml:predicateObjectMap [
+        rml:predicate ex:with ;
+        rml:objectMap [
+            # # Uncomment for named lists
+            rml:template "http://example.com/f/{id}" ;
+            rml:termType rml:IRI ;
+            #rml:allowEmptyListAndContainer true ;
+            #rml:gather ( [ rml:reference "vala" ]);# [ rml:reference "valb" ; ] ) ;
+            rml:gather ( [ rml:reference "vala"] [ rml:reference "valb"] ) ;
+            rml:gatherAs rdf:List ;
+            # rml:strategy rml:append ;
+        ] ;
+    ] ;
+.
+ 
+#_:b738439 a rml:RelativePathSource ;
+#    rml:path "data.json" .

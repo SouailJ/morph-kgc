@@ -219,6 +219,29 @@ RML_LEGACY_RDF_STAR_TRIPLE = f'{RML_LEGACY_NAMESPACE}RDFstarTriple'
 RML_LEGACY_SUBJECT_MAP = f'{RML_LEGACY_NAMESPACE}subjectMap'
 RML_LEGACY_OBJECT_MAP = f'{RML_LEGACY_NAMESPACE}objectMap'
 
+#Modifications 
+##############################################################################
+############################   RML- CC   #####################################
+##############################################################################
+RDF_NAMESPACE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+
+RML_GATHER_MAP_CLASS = f'{RML_NAMESPACE}GatherMap'
+RML_GATHER = f'{RML_NAMESPACE}gather'
+RML_GATHER_AS = f'{RML_NAMESPACE}gatherAs'
+RML_STRATEGY = f'{RML_NAMESPACE}strategy'
+RDF_LIST = f'{RDF_NAMESPACE}List'
+RDF_BAG = f'{RDF_NAMESPACE}Bag'
+RDF_SEQ = f'{RDF_NAMESPACE}Seq'
+RDF_ALT = f'{RDF_NAMESPACE}Alt'
+
+RML_ALLOW_EMPTY_LIST_AND_CONTAINER = f'{RML_NAMESPACE}allowEmptyListAndContainer'
+#append and cartesianProduct
+#RML_RDF_STAR_TRIPLE = f'{RML_NAMESPACE}RDFstarTriple'
+
+
+# RML-CC legacy ??
+
+
 ##############################################################################
 ############################   RML-FNML   ####################################
 ##############################################################################
