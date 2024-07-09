@@ -49,8 +49,8 @@
 
 - RMLTC-CC-0004-SML1: unnamed list as a subject, no predicate-object map
 - RMLTC-CC-0004-SML2: unnamed list as a subject, no predicate-object map, do not generate empty list
-- RMLTC-CC-0004-SML2E: unnamed list as a subject, no predicate-object map, generate empty list (we don't see the "empty list" as output, since to have a list, we need a predicate and an object → Added in the SML4E test)
-
+- RMLTC-CC-0004-SML2E: unnamed list as a subject, no predicate-object map, generate empty list
+  
 - RMLTC-CC-0004-SML3: unnamed list as a subject, with a predicate-object map
 - RMLTC-CC-0004-SML4: unnamed list as a subject, with a predicate-object map, do not generate empty list
 - RMLTC-CC-0004-SML4E: unnamed list as a subject, with a predicate-object map, generate empty list
