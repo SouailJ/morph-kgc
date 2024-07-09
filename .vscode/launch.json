@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/test/rml-core/json/RMLTC0003c",
+            "cwd": "${workspaceFolder}/test/rml-cc/JSON/RMLTC-CC-0-List",
             "justMyCode": false
         }
     ]

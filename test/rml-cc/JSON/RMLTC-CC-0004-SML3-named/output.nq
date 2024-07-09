@@ -1,0 +1,14 @@
+_:bnode4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "5" 
+_:bnode2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "3" 
+_:bnode5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "6" 
+<http://example.com/e/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "1" 
+<http://example.com/e/a> <http://example.com/ns#createdBy> <http://example.com/ns#JohnDoe> 
+_:bnode5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> 
+<http://example.com/e/b> <http://example.com/ns#createdBy> <http://example.com/ns#JohnDoe> 
+_:bnode1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode2 
+<http://example.com/e/b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode4 
+_:bnode4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode5 
+_:bnode1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "2" 
+<http://example.com/e/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode1 
+_:bnode2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> 
+<http://example.com/e/b> <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "4" 

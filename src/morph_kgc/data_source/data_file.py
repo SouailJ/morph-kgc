@@ -154,8 +154,11 @@ def _read_json(rml_rule, references):
 
     jsonpath_result = JSONPath(jsonpath_expression).parse(json_data)
     # normalize and remove nulls
-    json_df = pd.json_normalize([json_object for json_object in normalize_hierarchical_data(jsonpath_result) if None not in json_object.values()])
-
+    json_df = pd.json_normalize([
+        json_object 
+        for json_object in normalize_hierarchical_data(jsonpath_result) 
+        if json_object is not None and None not in json_object.values()
+    ])
     # add columns with null values for those references in the mapping rule that are not present in the data file
     missing_references_in_df = list(set(references).difference(set(json_df.columns)))
     json_df[missing_references_in_df] = None
@@ -163,15 +166,7 @@ def _read_json(rml_rule, references):
 
     return json_df
 
-
-# def check_for_empty_lists(json_data):
-#     has_empty_list = False
-#     for item in json_data:
-#         if 'vala' in item and isinstance(item['vala'], list) and len(item['vala']) == 0:
-#             has_empty_list = True
-#             break
-#     return has_empty_list
-
+#This function has as goal to check if the json data have empty list for a specific key (reference)
 def check_for_empty_lists(json_data, reference):
     has_empty_list = False
     for item in json_data:
@@ -189,39 +184,6 @@ def load_json(rml_rule):
         with open(rml_rule['logical_source_value'], encoding='utf-8') as json_file:
             json_data = json.load(json_file)
     return json_data
-
-
-"""
-
-def _read_json(rml_rule, references):
-    if rml_rule['logical_source_value'].startswith('http'):
-        with urllib.request.urlopen(rml_rule['logical_source_value']) as json_url:
-            json_data = json.loads(json_url.read().decode())
-    else:
-        with open(rml_rule['logical_source_value'], encoding='utf-8') as json_file:
-            json_data = json.load(json_file)
-
-    jsonpath_expression = rml_rule['iterator'] + '.('
-    for reference in references:
-        jsonpath_expression += reference.split('.')[0] + ','
-    jsonpath_expression = jsonpath_expression[:-1] + ')'
-
-    jsonpath_result = jsonpath_parse(jsonpath_expression).find(json_data)
-    jsonpath_result = [match.value for match in jsonpath_result]
-    
-    # Normalize data using normalize_hierarchical_data
-    normalized_data = list(normalize_hierarchical_data(jsonpath_result))
-
-    # Flatten the normalized data
-    json_df = pd.json_normalize([d for d in normalized_data if d is not None])
-    
-    # Identify missing references and add them with None values
-    missing_references_in_df = list(set(references).difference(set(json_df.columns)))
-    for reference in missing_references_in_df:
-        json_df[reference] = None
-
-    return json_df
-"""
 
 def _read_xml(rml_rule, references):
     if rml_rule['logical_source_value'].startswith('http'):

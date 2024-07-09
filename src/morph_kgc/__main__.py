@@ -8,7 +8,6 @@ __email__ = "arenas.guerrero.julian@outlook.com"
 
 import time
 import logging
-#import os
 
 import multiprocessing as mp
 
@@ -26,8 +25,6 @@ from .utils import prepare_output_files
 
 if __name__ == "__main__":
 
-    #mapping_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'mapping.ttl')
-    #config = f'[CONFIGURATION]\noutput_format=N-QUADS\n[DataSource]\nmappings={mapping_path}'
     config = load_config_from_command_line()
 
     setup_oracle(config)

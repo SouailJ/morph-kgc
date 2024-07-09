@@ -1,0 +1,6 @@
+_:bnode1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode2 
+_:bnode1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "2" 
+_:bnode2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "3" 
+_:bnode_subject1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "1" 
+_:bnode_subject1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:bnode1 
+_:bnode2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> 

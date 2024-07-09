@@ -230,15 +230,6 @@ def _complete_termtypes(mapping_graph):
     for term_map, _ in mapping_graph.query(query):
         mapping_graph.add((term_map, rdflib.term.URIRef(RML_TERM_TYPE), rdflib.term.URIRef(RML_RDF_STAR_TRIPLE)))
 
-    # #MODIFICATIONS 
-    # #add missing GatherMap termtypes (in the subject and object maps)
-    # query = 'SELECT DISTINCT ?term_map ?gather WHERE { ' \
-    #         f'?term_map <{RML_GATHER}> ?gather . ' \
-    #         f'OPTIONAL {{ ?term_map <{RML_TERM_TYPE}> ?termtype . }} . ' \
-    #         'FILTER ( !bound(?termtype) ) }'
-    # for term_map, _ in mapping_graph.query(query):
-    #     mapping_graph.add((term_map, rdflib.term.URIRef(RML_TERM_TYPE), rdflib.term.URIRef(RML_GATHER_MAP_CLASS))) # A revoir et mieux comprendre
-
     # add missing blanknode termtypes in the constant-valued object maps
     query = 'SELECT DISTINCT ?term_map ?constant WHERE { ' \
             f'?term_map <{RML_CONSTANT}> ?constant . ' \
@@ -383,8 +374,6 @@ def _transform_mappings_into_dataframe(mapping_graph, section_name):
     rml_df['object_join_conditions'] = rml_df['object_join_conditions'].astype(str)
     rml_df['subject_join_conditions'] = rml_df['subject_join_conditions'].astype(str)
 
-    print("HIER")
-    print(rml_df.columns)
 
     # convert all values to string
     for i, row in rml_df.iterrows():
@@ -402,7 +391,6 @@ def _transform_mappings_into_dataframe(mapping_graph, section_name):
     fnml_df = pd.DataFrame(fnml_query_results.bindings)
     fnml_df.columns = fnml_df.columns.map(str)
     fnml_df = fnml_df.map(str)
-    #print ("rml_df", rml_df['gather_map'])
     return rml_df, fnml_df
 
 

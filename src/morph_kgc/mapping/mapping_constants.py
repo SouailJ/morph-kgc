@@ -19,12 +19,9 @@ RML_DATAFRAME_COLUMNS = [
     'lang_datatype', 'lang_datatype_map_type', 'lang_datatype_map_value',
     'graph_map_type', 'graph_map_value',
     'subject_join_conditions', 'object_join_conditions',
-    'gather_map_subject', 'gather_map_object', 'gather', 'gather_reference', 'gather_references', 'gather_node', 'gatherAs', 'strategy', 'allowEmptyListAndContainer'
-]       #ajout dernière ligne
-"""
-        ?lang_datatype ?lang_datatype_map_type ?lang_datatype_map_value
-        ?gather_map_subject ?gather_map_object ?gather ?gatherAs ?strategy ?strategy_default
-"""
+    'gather', 'gather_subject', 'gather_reference', 'gather_references', 'gather_node', 'gatherAs', 'gatherAs_subject', 'strategy', 'allowEmptyListAndContainer'
+]
+
 ##############################################################################
 #######################   FNML DATAFRAME COLUMNS   ############################
 ##############################################################################
@@ -49,10 +46,8 @@ RML_PARSING_QUERY = """
         ?object_map_type ?object_map_value ?object_map ?object_termtype
         ?lang_datatype ?lang_datatype_map_type ?lang_datatype_map_value
         ?graph_map_type ?graph_map_value
-        ?gather_map_subject ?gather_map_object ?gather ?gather_reference ?gather_node ?gatherAs ?strategy ?allowEmptyListAndContainer
+        ?gather ?gather_subject ?gather_reference ?gather_node ?gatherAs ?gatherAs_subject ?strategy ?allowEmptyListAndContainer
         (GROUP_CONCAT(?gather_reference; separator=", ") AS ?gather_references)
-
-        # Ajout de la dernière ligne
 
     WHERE {
         ?triples_map_id rml:logicalSource ?_source ;
@@ -75,6 +70,17 @@ RML_PARSING_QUERY = """
         FILTER ( ?subject_map_type IN (
                             rml:constant, rml:template, rml:reference, rml:quotedTriplesMap, rml:functionExecution, rml:gather, rml:gatherAs, rml:strategy, rml:allowEmptyListAndContainer ) ) .
         OPTIONAL { ?subject_map rml:termType ?subject_termtype . }
+        
+        # Added for RML-CC
+        OPTIONAL { 
+            ?subject_map rml:gather ?gather_subject .
+            ?subject_map rml:gatherAs ?gatherAs_subject .
+        } 
+
+        OPTIONAL {
+            ?gather_subject rdf:rest*/rdf:first ?gather_node .
+            ?gather_node rml:reference ?gather_reference .
+        }
 
     # Predicate -----------------------------------------------------------------------
         OPTIONAL {
@@ -89,7 +95,8 @@ RML_PARSING_QUERY = """
                 
                 OPTIONAL {
                     ?object_map ?object_map_type ?object_map_value .
-                    #AJOUT : permet d'autoriser le fait que objectMap n'ai pas de type (pour que rml:gather ne soit pas null)
+
+                    #Added: allows objectMap to have no type (so that rml:gather is not null)
                     FILTER (!BOUND(?object_map_type) || ?object_map_type IN (
                                 rml:constant, rml:template, rml:reference, rml:quotedTriplesMap, rml:functionExecution ) ) .
                 }
@@ -103,7 +110,7 @@ RML_PARSING_QUERY = """
                     FILTER ( ?lang_datatype_map_type IN ( rml:constant, rml:template, rml:reference, rml:functionExecution ) ) .
                 }
             
-            #AJOUT de la clause OPTIONNAL pour les gatherMap    
+            # Added for RML-CC
             OPTIONAL {
                 ?_predicate_object_map rml:objectMap ?object_map .
                 ?object_map rml:gather ?gather .
@@ -138,13 +145,11 @@ RML_PARSING_QUERY = """
                 ?graph_map ?graph_map_type ?graph_map_value .
                 FILTER ( ?graph_map_type IN ( rml:constant, rml:template, rml:reference, rml:functionExecution ) ) .
             }
-
-
         }
     }
-    GROUP BY ?gather
+    GROUP BY ?gather 
     
-"""#AJOUT du dernier OPTIONAL ...
+"""
 
 RML_JOIN_CONDITION_PARSING_QUERY = """
     prefix rml: <http://w3id.org/rml/>
